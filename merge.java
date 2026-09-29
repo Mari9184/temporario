@@ -62,4 +62,49 @@ public class merge {
             v[i] = auxiliar[i - inicio];
         }
     }
+
+    public static void mergeSortInt(int inicio, int tamanho, int[] v) {
+        if (inicio < tamanho - 1) {
+            int meio = (inicio + tamanho) / 2;
+            mergeSortInt(inicio, meio, v);
+            mergeSortInt(meio, tamanho, v);
+            intercalarInt(inicio, meio, tamanho, v);
+        }
+    }
+
+    public static void intercalarInt(int inicio, int meio, int tamanho, int[] v) {
+        int i, j, k;
+        int[] auxiliar = new int[tamanho - inicio];
+        i = inicio;
+        j = meio;
+        k = 0;
+
+        while (i < meio && j < tamanho) {
+            if (v[i] <= v[j]) {
+                auxiliar[k] = v[i];
+                k++;
+                i++;
+            } else {
+                auxiliar[k] = v[j];
+                k++;
+                j++;
+            }
+        }
+
+        while (i < meio) {
+            auxiliar[k] = v[i];
+            k++;
+            i++;
+        }
+
+        while (j < tamanho) {
+            auxiliar[k] = v[j];
+            k++;
+            j++;
+        }
+
+        for (i = inicio; i < tamanho; i++) {
+            v[i] = auxiliar[i - inicio];
+        }
+    }
 }
